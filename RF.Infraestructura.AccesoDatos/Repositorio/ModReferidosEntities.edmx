@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ReferidosModelEntity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comisiones">
+          <Key>
+            <PropertyRef Name="ComisionId" />
+          </Key>
+          <Property Name="ComisionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreComision" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="ValorComision" Type="int" Nullable="false" />
+          <Property Name="DescripcionComision" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ComisionActiva" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoId" />
+          </Key>
+          <Property Name="EmpleadoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Cedula" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NumeroCuentaEmpleado" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+          <Property Name="EmpleadoActivo" Type="bit" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpleadoId" Type="int" Nullable="false" />
+          <Property Name="ComisionId" Type="int" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="MontoPago" Type="money" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreRol" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DescripcionRol" Type="varchar" MaxLength="200" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UsuarioRol">
+          <Key>
+            <PropertyRef Name="UsuarioRolId" />
+          </Key>
+          <Property Name="UsuarioRolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="RolId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpleadoId" Type="int" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordUsuario" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaActualizacion" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="VentaId" />
+          </Key>
+          <Property Name="VentaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpleadoId" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="money" Nullable="false" />
+          <Property Name="FechaVenta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Pagos_Comisiones">
+          <End Role="Comisiones" Type="Self.Comisiones" Multiplicity="0..1" />
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comisiones">
+              <PropertyRef Name="ComisionId" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="ComisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagos_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="UsuarioRol">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="UsuarioRol">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReferidosModelEntityStoreContainer">
+          <EntitySet Name="Comisiones" EntityType="Self.Comisiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Pagos_Comisiones" Association="Self.FK_Pagos_Comisiones">
+            <End Role="Comisiones" EntitySet="Comisiones" />
+            <End Role="Pagos" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Empleados" Association="Self.FK_Pagos_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Pagos" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Roles" Association="Self.FK_UsuarioRol_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Usuarios" Association="Self.FK_UsuarioRol_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Empleados" Association="Self.FK_Usuarios_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Empleados" Association="Self.FK_Ventas_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReferidosModelEntity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comisiones">
+          <Key>
+            <PropertyRef Name="ComisionId" />
+          </Key>
+          <Property Name="ComisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreComision" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="ValorComision" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionComision" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ComisionActiva" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pagos" Relationship="Self.FK_Pagos_Comisiones" FromRole="Comisiones" ToRole="Pagos" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoId" />
+          </Key>
+          <Property Name="EmpleadoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroCuentaEmpleado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmpleadoActivo" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pagos" Relationship="Self.FK_Pagos_Empleados" FromRole="Empleados" ToRole="Pagos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Empleados" FromRole="Empleados" ToRole="Usuarios" />
+          <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_Empleados" FromRole="Empleados" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpleadoId" Type="Int32" Nullable="false" />
+          <Property Name="ComisionId" Type="Int32" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoPago" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Comisiones" Relationship="Self.FK_Pagos_Comisiones" FromRole="Pagos" ToRole="Comisiones" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Pagos_Empleados" FromRole="Pagos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreRol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescripcionRol" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UsuarioRol" Relationship="Self.FK_UsuarioRol_Roles" FromRole="Roles" ToRole="UsuarioRol" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UsuarioRol">
+          <Key>
+            <PropertyRef Name="UsuarioRolId" />
+          </Key>
+          <Property Name="UsuarioRolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="RolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_UsuarioRol_Roles" FromRole="UsuarioRol" ToRole="Roles" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_UsuarioRol_Usuarios" FromRole="UsuarioRol" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpleadoId" Type="Int32" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Usuarios_Empleados" FromRole="Usuarios" ToRole="Empleados" />
+          <NavigationProperty Name="UsuarioRol" Relationship="Self.FK_UsuarioRol_Usuarios" FromRole="Usuarios" ToRole="UsuarioRol" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="VentaId" />
+          </Key>
+          <Property Name="VentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpleadoId" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="FechaVenta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Ventas_Empleados" FromRole="Ventas" ToRole="Empleados" />
+        </EntityType>
+        <Association Name="FK_Pagos_Comisiones">
+          <End Role="Comisiones" Type="Self.Comisiones" Multiplicity="0..1" />
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comisiones">
+              <PropertyRef Name="ComisionId" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="ComisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagos_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="UsuarioRol">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="UsuarioRol">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReferidosEntitiesModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comisiones" EntityType="Self.Comisiones" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" />
+          <AssociationSet Name="FK_Pagos_Comisiones" Association="Self.FK_Pagos_Comisiones">
+            <End Role="Comisiones" EntitySet="Comisiones" />
+            <End Role="Pagos" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Empleados" Association="Self.FK_Pagos_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Pagos" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Empleados" Association="Self.FK_Usuarios_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Empleados" Association="Self.FK_Ventas_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Roles" Association="Self.FK_UsuarioRol_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Usuarios" Association="Self.FK_UsuarioRol_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReferidosModelEntityStoreContainer" CdmEntityContainer="ReferidosEntitiesModel">
+          <EntitySetMapping Name="Comisiones">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.Comisiones">
+              <MappingFragment StoreEntitySet="Comisiones">
+                <ScalarProperty Name="ComisionId" ColumnName="ComisionId" />
+                <ScalarProperty Name="NombreComision" ColumnName="NombreComision" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="ValorComision" ColumnName="ValorComision" />
+                <ScalarProperty Name="DescripcionComision" ColumnName="DescripcionComision" />
+                <ScalarProperty Name="ComisionActiva" ColumnName="ComisionActiva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="NumeroCuentaEmpleado" ColumnName="NumeroCuentaEmpleado" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="EmpleadoActivo" ColumnName="EmpleadoActivo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.Pagos">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="ComisionId" ColumnName="ComisionId" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="MontoPago" ColumnName="MontoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioRol">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.UsuarioRol">
+              <MappingFragment StoreEntitySet="UsuarioRol">
+                <ScalarProperty Name="UsuarioRolId" ColumnName="UsuarioRolId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="PasswordUsuario" ColumnName="PasswordUsuario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="ReferidosModelEntity.Ventas">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
