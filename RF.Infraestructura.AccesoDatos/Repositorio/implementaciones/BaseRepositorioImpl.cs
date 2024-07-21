@@ -15,7 +15,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     context.Set<TEntity>().Add(entity);
                     context.SaveChanges();
@@ -32,7 +32,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var entity = context.Set<TEntity>().Find(id);
                     context.Set<TEntity>().Remove(entity);
@@ -55,7 +55,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     return context.Set<TEntity>().ToList();
                 }
@@ -70,7 +70,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     return context.Set<TEntity>().Find(id);
                 }
@@ -86,7 +86,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     context.Entry(entity).State = EntityState.Modified;
                     context.SaveChanges();

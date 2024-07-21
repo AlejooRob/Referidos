@@ -17,11 +17,14 @@ namespace RF.UI.Windows.Formularios
     {
         private EmpleadosControlador servicio;
         private EmpleadosVistaModelo empleadoVM;
+        private RolesControlador servicioRoles;
         public FrmEmpleados()
         {
             InitializeComponent();
             servicio = new EmpleadosControlador();
+            servicioRoles = new RolesControlador();
             empleadoVM = new EmpleadosVistaModelo();
+
             //dataGridView1.CellContentDoubleClick += dataGridView1_CellContentDoubleClick;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             ListarDatos();
@@ -209,7 +212,6 @@ namespace RF.UI.Windows.Formularios
             }
             return true;
         }
-
 
 
     }

@@ -14,7 +14,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var resultado = context.Ventas.Where(rs => rs.EmpleadoId == empleadoId).Sum(rs => rs.Monto);
                     return resultado;
@@ -31,7 +31,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var resultado = from ven in context.Ventas
                                     where ven.FechaVenta >= fechaInicio && ven.FechaVenta <= fechaFinal
@@ -50,7 +50,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var resultado = context.Ventas.Where(rs => rs.VentaId == ventaId);
                     return resultado.Single();
@@ -67,7 +67,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var resultado = context.Ventas.Where(rs => rs.EmpleadoId == empleadoId);
                     return resultado;

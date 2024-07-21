@@ -14,7 +14,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from emple in context.Empleados
                                  where emple.Apellidos == apellido
@@ -33,7 +33,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from emple in context.Empleados
                                  where emple.Cedula == ci
@@ -52,7 +52,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from emple in context.Empleados
                                  where emple.Nombres == nombre
@@ -72,7 +72,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = context.Empleados.Where(rs => rs.EmpleadoActivo == true);
                     return result.ToList();

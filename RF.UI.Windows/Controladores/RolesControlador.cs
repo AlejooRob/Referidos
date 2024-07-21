@@ -88,5 +88,22 @@ namespace RF.UI.Windows.Controladores
             }
             return listaVistaModelo;
         }
+
+        public IEnumerable<RolesVistaModelo> ListarRolesActivos()
+        {
+            var listaUsuarios = servicio.obtenerRolesActivos();
+            List<RolesVistaModelo> listaVistaModelo = new List<RolesVistaModelo>();
+            foreach (var item in listaUsuarios)
+            {
+                listaVistaModelo.Add(new RolesVistaModelo
+                {
+                    RolId = item.RolId,
+                    NombreRol = item.NombreRol,
+                    DescripcionRol = item.DescripcionRol,
+                    Activo = item.Activo
+                });
+            }
+            return listaVistaModelo;
+        }
     }
 }

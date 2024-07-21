@@ -14,7 +14,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from com in context.Comisiones
                                  where com.ComisionActiva == true
@@ -33,7 +33,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from com in context.Comisiones
                                  where com.NombreComision == nombre
@@ -50,7 +50,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var resultado = from com in context.Comisiones
                                     where com.ComisionId == id

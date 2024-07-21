@@ -62,15 +62,15 @@
     <Compile Include="Repositorio\implementaciones\UsuarioRolRepositorioImpl.cs" />
     <Compile Include="Repositorio\implementaciones\UsuariosRepositorioImpl.cs" />
     <Compile Include="Repositorio\implementaciones\VentasRepositorioImpl.cs" />
-    <Compile Include="Repositorio\ModReferidosEntities.Context.cs">
+    <Compile Include="Repositorio\ModeloReferido.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModReferidosEntities.Context.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositorio\ModReferidosEntities.Designer.cs">
+    <Compile Include="Repositorio\ModeloReferido.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModReferidosEntities.edmx</DependentUpon>
+      <DependentUpon>ModeloReferido.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -82,22 +82,22 @@
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="Repositorio\ModReferidosEntities.edmx">
+    <EntityDeploy Include="Repositorio\ModeloReferido.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModReferidosEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModeloReferido.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Repositorio\ModReferidosEntities.edmx.diagram">
-      <DependentUpon>ModReferidosEntities.edmx</DependentUpon>
+    <None Include="Repositorio\ModeloReferido.edmx.diagram">
+      <DependentUpon>ModeloReferido.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Repositorio\ModReferidosEntities.Context.tt">
+    <Content Include="Repositorio\ModeloReferido.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModReferidosEntities.edmx</DependentUpon>
-      <LastGenOutput>ModReferidosEntities.Context.cs</LastGenOutput>
+      <DependentUpon>ModeloReferido.edmx</DependentUpon>
+      <LastGenOutput>ModeloReferido.Context.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

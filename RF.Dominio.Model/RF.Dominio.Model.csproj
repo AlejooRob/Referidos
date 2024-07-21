@@ -50,33 +50,39 @@
     <Compile Include="Abstracciones\IUsuarios.cs" />
     <Compile Include="Abstracciones\IVentas.cs" />
     <Compile Include="Entidades\Comisiones.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Empleados.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entidades\ModelReferidos.cs">
+    <Compile Include="Entidades\ModeloReferido.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Pagos.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Roles.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\sysdiagrams.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\UsuarioRol.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Usuarios.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Ventas.cs">
-      <DependentUpon>ModelReferidos.tt</DependentUpon>
+      <DependentUpon>ModeloReferido.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,9 +93,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Entidades\ModelReferidos.tt">
+    <Content Include="Entidades\ModeloReferido.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelReferidos.cs</LastGenOutput>
+      <LastGenOutput>ModeloReferido.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

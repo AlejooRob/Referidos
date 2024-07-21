@@ -16,7 +16,10 @@ namespace RF.UI.Windows.Formularios
     
     public partial class FrmUsuarios : Form
     {
-        EmpleadosControlador empleadosControlador;
+        private EmpleadosControlador empleadosControlador;
+        private EmpleadosVistaModelo empleadosVistaModelo;
+        private RolesVistaModelo rolesVistaModelo;
+        private RolesControlador rolesControlador;
         private UsuariosControlador servicio;
         private UsuariosVistaModelo usuariosVM;
         public FrmUsuarios()
@@ -25,8 +28,10 @@ namespace RF.UI.Windows.Formularios
             servicio = new UsuariosControlador();  
             usuariosVM = new UsuariosVistaModelo();
             empleadosControlador = new EmpleadosControlador();
+            rolesControlador = new RolesControlador();
             ListarDatos();
             leerEmpleado();
+            leerRoles();
         }
 
         public void ListarDatos()
@@ -81,6 +86,7 @@ namespace RF.UI.Windows.Formularios
             txtpsw.Text = "";
             ckActivo.Checked = true;
             comboBoxEmpleado.SelectedIndex = -1;
+            comboBoxRoles.SelectedIndex = -1;
         }
 
         private void iconButton1_Click(object sender, EventArgs e)
@@ -137,6 +143,13 @@ namespace RF.UI.Windows.Formularios
             comboBoxEmpleado.ValueMember = "EmpleadoId";
 
 
+        }
+
+        private void leerRoles()
+        {
+            comboBoxRoles.DataSource = rolesControlador.ListarRolesActivos();
+            comboBoxRoles.DisplayMember = "NombreRol";
+            comboBoxRoles.ValueMember = "RolId";
         }
         private bool ValidarDatos()
         {

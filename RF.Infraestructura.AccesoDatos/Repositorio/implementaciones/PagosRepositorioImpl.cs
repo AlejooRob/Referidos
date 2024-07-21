@@ -16,7 +16,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from pag in context.Pagos
                                  where pag.EmpleadoId == empleadoId
@@ -35,7 +35,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from pag in context.Pagos
                                  where pag.FechaPago >= fechaInicio && pag.FechaPago <= fechaFinal
@@ -54,7 +54,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = context.Pagos.Where(p => p.FechaPago.Month == mes && p.FechaPago.Year == year).Sum(p => p.MontoPago);
                     return (decimal)result;
@@ -71,7 +71,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     // Obtener el total de ventas del empleado
                     var totalVentas = context.Ventas
@@ -109,7 +109,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var sumaMontos = context.Ventas
                         .Where(v => v.EmpleadoId == empleadoId && v.FechaVenta >= fechaInicio && v.FechaVenta <= fechaFin)

@@ -14,7 +14,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from usu in context.Usuarios
                                  where usu.NombreUsuario == email
@@ -33,7 +33,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from usu in context.Usuarios
                                  where usu.Activo == true
@@ -52,7 +52,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var usuarioID = (from u in context.Usuarios
                                     where u.NombreUsuario == email && u.PasswordUsuario == password

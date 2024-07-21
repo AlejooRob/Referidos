@@ -14,7 +14,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from rol in context.Roles
                                  where rol.Activo == true
@@ -33,7 +33,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from urol in context.UsuarioRol
                                  join r in context.Roles on urol.RolId equals r.RolId
@@ -54,7 +54,7 @@ namespace RF.Infraestructura.AccesoDatos.Repositorio.implementaciones
         {
             try
             {
-                using (var context = new ReferidosEntitiesModel())
+                using (var context = new ReferidsEntities())
                 {
                     var result = from rol in context.Roles
                                  where rol.NombreRol == nombre

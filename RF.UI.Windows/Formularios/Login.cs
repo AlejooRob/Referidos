@@ -1,4 +1,5 @@
 ﻿using RF.UI.Windows.Controladores;
+using RF.UI.Windows.Middleware;
 using RF.UI.Windows.VistaModelo;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace RF.UI.Windows.Formularios
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            var result = servicioUsuario.verificarUsurioPassword(textBoxUserID.Text.Trim(), textBoxPassword.Text.Trim());
+            string passW = Encrypt.GetSHA256(textBoxPassword.Text.Trim());
+            var result = servicioUsuario.verificarUsurioPassword(textBoxUserID.Text.Trim(), passW);
             if(result != 0)
             {
                 this.Hide();

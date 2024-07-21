@@ -73,7 +73,7 @@
             this.labelUserID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelUserID.Location = new System.Drawing.Point(60, 125);
             this.labelUserID.Name = "labelUserID";
-            this.labelUserID.Size = new System.Drawing.Size(32, 13);
+            this.labelUserID.Size = new System.Drawing.Size(41, 16);
             this.labelUserID.TabIndex = 3;
             this.labelUserID.Text = "Email";
             // 
@@ -84,7 +84,7 @@
             this.labelPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelPassword.Location = new System.Drawing.Point(60, 165);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(53, 13);
+            this.labelPassword.Size = new System.Drawing.Size(67, 16);
             this.labelPassword.TabIndex = 4;
             this.labelPassword.Text = "Password";
             // 
@@ -108,7 +108,7 @@
             this.linkLabelForgotPassword.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.linkLabelForgotPassword.Location = new System.Drawing.Point(110, 260);
             this.linkLabelForgotPassword.Name = "linkLabelForgotPassword";
-            this.linkLabelForgotPassword.Size = new System.Drawing.Size(86, 13);
+            this.linkLabelForgotPassword.Size = new System.Drawing.Size(109, 16);
             this.linkLabelForgotPassword.TabIndex = 6;
             this.linkLabelForgotPassword.TabStop = true;
             this.linkLabelForgotPassword.Text = "Forgot Password";
